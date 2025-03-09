@@ -7,10 +7,7 @@ function App() {
   return (
     <SidebarProvider>
       <Header />
-      <div>
-        {/* The Outlet renders the child route components */}
         <Outlet />
-      </div>
     </SidebarProvider>
   );
 }

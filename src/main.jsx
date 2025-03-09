@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFound from './Components/NotFound.jsx'
 import RegistrationForm from './Components/RegistrationForm.jsx'
 import Home from './Pages/Home.jsx'
+import Video from './Pages/Video.jsx'
+import ChannelPage from './Pages/ChannelPage.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const appRouter = createBrowserRouter([
       {
         path : "/",
         element:  <Home/>
+      },
+      {
+        path:"/watch/:id",
+        element: <Video/>
+      },
+      {
+        path:"/user/:id",
+        element: <ChannelPage/>
       },
       {
         path: "/login",

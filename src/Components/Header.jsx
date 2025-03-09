@@ -42,7 +42,7 @@ const Header = () => {
                 Create
               </span>
             </div>
-            <FaRegBell className="text-3xl text-gray-700 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-all" />
+            <FaRegBell className="text-4xl text-gray-700 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-all" />
             <Link to={"/login"}>
               <img
                 onClick={() => setUserModal((prev) => !prev)}
