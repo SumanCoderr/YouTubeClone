@@ -1,17 +1,18 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-// import Header from './Components/Header'
-import Home from './Components/Home'
+import { Outlet } from 'react-router-dom';
+import './App.css';
+import Header from './Components/Header';
+import { SidebarProvider } from './utilis/useContext.jsx';
 
 function App() {
-
   return (
-    <>
-     <Home/>
-    </>
-  )
+    <SidebarProvider>
+      <Header />
+      <div>
+        {/* The Outlet renders the child route components */}
+        <Outlet />
+      </div>
+    </SidebarProvider>
+  );
 }
 
-export default App
+export default App;

@@ -1,87 +1,73 @@
-// import React from 'react';
-// import './Header.css';
-// import { IoReorderThreeOutline } from "react-icons/io5";
-
-// const Header = () => {
-//   return (
-//     <div className="header">
-//       <div className="header-left">
-//         <div className='h-3 cursor-pointer'>
-//             <IoReorderThreeOutline/>
-//         </div>
-//         <img
-//           className="header-logo"
-//           src="https://lh3.googleusercontent.com/3zkP2SYe7yYoKKe47bsNe44yTgb4Ukh__rBbwXwgkjNRe4PykGG409ozBxzxkrubV7zHKjfxq6y9ShogWtMBMPyB3jiNps91LoNH8A=s500 "
-//           alt="YouTube Logo"
-//         />
-//         <input
-//           className="header-search"
-//           type="text"
-//           placeholder="Search"
-//         />
-//       </div>
-//       <div className="header-right">
-//         <img
-//           className="header-avatar"
-//           src="https://www.example.com/path/to/your-avatar.jpg"
-//           alt="User Avatar"
-//         />
-//       </div>
-//       <div>
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Header;
-
-import React from "react";
-import { useState } from "react";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { FaYoutube } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
-import { FaRegBell } from "react-icons/fa6";
+import { FaRegBell } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 import SearchBar from "./SearchBar";
-import Sidebar from "./SideBar";
-import CloseSideBar from "./CloseSideBar";
+import { Link } from "react-router-dom";
+import { useSidebar } from "../utilis/useContext.jsx";
+import { useState } from "react";
 
 const Header = () => {
-  const [sideBarToggle, setSideBarToggle] = useState(true);
+  const { sideBar, setSideBarFun } = useSidebar();
+  const [userModal, setUserModal] = useState(false);
+  const [user, setUser] = useState(
+    "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
+  );
 
   return (
-    <>
-      <div className="flex items-center flex-row justify-around p-3 gap-55 ">
-        <div className=" flex flex-row items-center gap-2">
-          <div className="cursor-pointer p-2">
-            <IoReorderThreeOutline
-              className=" text-4xl hover:bg-gray-100 p-1 rounded-2xl "
-              onClick={() => setSideBarToggle(!sideBarToggle)}
-            />
+    <div className="m-0 p-0 box-border">
+      <div className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <div className="flex items-center justify-between p-1">
+          <div className="flex items-center gap-2">
+            <div
+              onClick={() => setSideBarFun(!sideBar)}
+              className="cursor-pointer p-2"
+            >
+              <IoReorderThreeOutline className="text-4xl hover:bg-gray-100 p-1 rounded-2xl" />
+            </div>
+            <div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
+              <FaYoutube className="text-red-600 text-3xl" />
+              <h6>YouTube</h6>
+            </div>
           </div>
 
-          <div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
-            <FaYoutube className="text-red-600 text-3xl" />
-            <h6>YouTube</h6>
+          <div>
+            <SearchBar />
           </div>
-        </div>
 
-        <div>
-          <SearchBar />
-        </div>
-
-        <div className="flex flex-row gap-5 items-center">
-          <div className="flex flex-row items-center gap-2 bg-gray-100 px-2 py-1 rounded-3xl cursor-pointer">
-            <FiPlus className="text-3xl hover:bg-gray-100 " />
-            <span className="font-semibold text-lg">Create</span>
+          <div className="flex items-center gap-5 relative">
+            <div className="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-3xl cursor-pointer hover:bg-gray-200 transition-all">
+              <FiPlus className="text-3xl text-gray-700" />
+              <span className="font-semibold text-lg text-gray-800">
+                Create
+              </span>
+            </div>
+            <FaRegBell className="text-3xl text-gray-700 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-all" />
+            <Link to={"/login"}>
+              <img
+                onClick={() => setUserModal((prev) => !prev)}
+                src={user}
+                className="cursor-pointer h-10 w-10 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-all"
+                alt="user"
+              />
+            </Link>
+            {userModal && (
+              <div className="absolute top-12 right-0 bg-white rounded-md shadow-lg w-40 border border-gray-300">
+                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                  Profile
+                </div>
+                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                  Logout
+                </div>
+                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                  Login
+                </div>
+              </div>
+            )}
           </div>
-          <FaRegBell className=" text-4xl  p-1 rounded-3xl cursor-pointer hover:bg-gray-100" />
-          <FaUserCircle className="text-3xl cursor-pointer " />
         </div>
       </div>
-      {sideBarToggle ? <Sidebar /> : <CloseSideBar/>}
-    </>
+    </div>
   );
 };
 

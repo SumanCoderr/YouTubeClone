@@ -9,14 +9,14 @@ function SearchBar() {
   };
 
   return (
-    <div className="flex   items-center border border-gray-300 rounded-full ">
+    <div className="flex items-center border border-gray-300 rounded-full ">
       {/* Search Input */}
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search"
-        className="pl-3 py-2 w-150 rounded-l-full focus:outline-none"
+        className="pl-6 py-2 w-150 rounded-l-full focus:outline-none"
       />
 
       {/* Search Button */}
@@ -31,3 +31,5 @@ function SearchBar() {
 }
 
 export default SearchBar;
+
+
