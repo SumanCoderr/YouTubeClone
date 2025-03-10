@@ -25,10 +25,10 @@ const Header = () => {
             >
               <IoReorderThreeOutline className="text-4xl hover:bg-gray-100 p-1 rounded-2xl" />
             </div>
-            <div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
+            <Link to={"/"}><div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
               <FaYoutube className="text-red-600 text-3xl" />
               <h6>YouTube</h6>
-            </div>
+            </div></Link>
           </div>
 
           <div>
@@ -43,25 +43,22 @@ const Header = () => {
               </span>
             </div>
             <FaRegBell className="text-4xl text-gray-700 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-all" />
-            <Link to={"/login"}>
+            {/* <Link to={"/login"}> */}
               <img
                 onClick={() => setUserModal((prev) => !prev)}
                 src={user}
                 className="cursor-pointer h-10 w-10 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-all"
                 alt="user"
               />
-            </Link>
+            {/* </Link> */}
             {userModal && (
               <div className="absolute top-12 right-0 bg-white rounded-md shadow-lg w-40 border border-gray-300">
                 <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
                   Profile
                 </div>
-                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
-                  Logout
-                </div>
-                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                <Link to="/login"><div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
                   Login
-                </div>
+                </div></Link>
               </div>
             )}
           </div>

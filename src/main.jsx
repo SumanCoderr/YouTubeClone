@@ -1,13 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFound from './Components/NotFound.jsx'
-import RegistrationForm from './Components/RegistrationForm.jsx'
 import Home from './Pages/Home.jsx'
-import Video from './Pages/Video.jsx'
-import ChannelPage from './Pages/ChannelPage.jsx'
+import Login from './Components/Login.jsx'
+import SignIp from './Components/SignIn.jsx'
+import VideoPage from './Pages/VideoPage.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -20,16 +19,20 @@ const appRouter = createBrowserRouter([
         element:  <Home/>
       },
       {
-        path:"/watch/:id",
-        element: <Video/>
+        path:"/:id",
+        element: <VideoPage/>
       },
-      {
-        path:"/user/:id",
-        element: <ChannelPage/>
-      },
+      // {
+      //   path:"/user/:id",
+      //   element: <ChannelPage/>
+      // },
       {
         path: "/login",
-        element: <RegistrationForm/>
+        element: <Login/>
+      },
+      {
+        path: "/signin",
+        element:<SignIp/>
       }
     ]
   }

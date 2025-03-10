@@ -13,19 +13,3 @@ function Home() {
 }
 
 export default Home;
-
-// import HomePage from "../Components/HomePage";
-// import SideBar from "../Components/SideBar";
-// import CloseSideBar from "../Components/CloseSideBar";
-
-// function Home() {
-//   return (
-//     <>
-//       <SideBar />
-//       <CloseSideBar />
-//       <HomePage />
-//     </>
-//   );
-// }
-
-// export default Home;

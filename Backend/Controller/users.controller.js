@@ -24,12 +24,14 @@ export function login(req, res) {
             }
 
             // Generate JWT token with longer expiration (e.g., 1 hour or 24 hours)
-            const token = jwt.sign({ id: data._id }, "myKey", {  });
+            const token = jwt.sign({ id: data._id }, "myKey", { expiresIn: "1h" });
+
+            console.log(token)
 
             res.status(200).send({
                 user: {
                     email: data.email,
-                    fullName: data.fullName,
+                    name: data.name,
                 },
                 accessToken: token,
             });
@@ -39,10 +41,10 @@ export function login(req, res) {
 
 
 export function register(req, res) {
-    const { fullName, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Check for missing fields
-    if (!fullName || !email || !password) {
+    if (!name || !email || !password) {
         return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -66,7 +68,7 @@ export function register(req, res) {
 
             // Create a new user instance
             const newUser = new User({
-                fullName,
+                name,
                 email,
                 password: hashedPassword,
             });

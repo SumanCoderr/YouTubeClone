@@ -7,6 +7,7 @@ import { MdOutlineSmartDisplay } from 'react-icons/md';
 import { MdOutlineWatchLater } from 'react-icons/md';
 import { AiOutlineLike } from 'react-icons/ai';
 import { useSidebar } from '../utilis/useContext.jsx';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   const { sideBar } = useSidebar();
@@ -15,14 +16,14 @@ const SideBar = () => {
     <div
       className={`${
         sideBar ? 'block' : 'hidden'
-      }  w-64 h-full bg-white shadow-lg border-r border-gray-300`}
+      }  w-70 h-full bg-white shadow-lg border-r border-gray-300`}
     >
       {/* Top Section */}
       <div className="flex flex-col gap-3 px-6 py-6 border-b border-gray-300">
-        <div className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
+        <Link to ="/"><div className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
           <FaHome className="text-xl" />
           <span className="text-lg font-medium">Home</span>
-        </div>
+        </div></Link>
 
         <div className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-lg cursor-pointer">
           <SiYoutubeshorts className="text-xl" />
