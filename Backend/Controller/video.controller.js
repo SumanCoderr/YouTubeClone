@@ -6,13 +6,14 @@ export const uploadVideo = async (req, res) => {
     if (!req.user || !req.user.id) {
       return res.status(403).json({ message: "User not authenticated" });
     }
-    const { title, views, description, videoLink, thumbnail, channelName } = req.body;
+    const { title, views, category, description, videoLink, thumbnail, channelName } = req.body;
     const userId = req.user.id; // Assumes user info is set by authMiddleware
 
     const videoUpload = new Video({
       user: userId,
       title,
       views,
+      category,
       description,
       videoLink,
       thumbnail,
