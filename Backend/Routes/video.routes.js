@@ -5,5 +5,5 @@ export function videoRoutes(app) {
     app.post("/video", authMiddleware, uploadVideo);
     app.get("/allvideos",authMiddleware, getAllVideo);
     app.get("/video/:id", authMiddleware, getVideoById)
-    app.patch("/video/:id", authMiddleware, updatelike )
+    app.put("/video/like", authMiddleware, updatelike )
 }

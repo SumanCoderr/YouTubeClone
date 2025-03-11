@@ -12,11 +12,12 @@ import { Link } from 'react-router-dom';
 const SideBar = () => {
   const { sideBar } = useSidebar();
 
+
   return (
     <div
       className={`${
         sideBar ? 'block' : 'hidden'
-      }  w-70 h-full bg-white shadow-lg border-r border-gray-300`}
+      } transition-all duration-1000  w-70 h-full z-10 bg-white shadow-lg border-r border-gray-300`}
     >
       {/* Top Section */}
       <div className="flex flex-col gap-3 px-6 py-6 border-b border-gray-300">

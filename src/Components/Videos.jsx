@@ -11,7 +11,7 @@ function Videos({ videos }) { // Accept filtered videos as a prop
     <div className="p-4">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {videos.map((video) => (
-          <Link to={`/${video._id}`} key={video._id}>
+          <Link to={`/watch/${video._id}`} key={video._id}>
             <div className="cursor-pointer mb-5">
               <img
                 src={video.thumbnail}

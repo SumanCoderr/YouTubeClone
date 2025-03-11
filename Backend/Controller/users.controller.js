@@ -82,8 +82,3 @@ export function register(req, res) {
         }
     });
 }
-
-
-// export const loginDetails(){
-
-// }

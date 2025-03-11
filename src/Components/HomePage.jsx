@@ -53,13 +53,13 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container absolute lg:relative mx-auto p-4">
       {/* Filters section */}
       <div className="flex flex-wrap gap-3 mb-8">
         {options.map((item, index) => (
           <div
             key={index}
-            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-xl cursor-pointer hover:bg-gray-400 transition-all"
+            className="bg-gray-200 text-gray-800 px-4 text-sm md:py-2 md:text-lg py-1 rounded-xl cursor-pointer hover:bg-gray-400 transition-all"
             onClick={() => handleCategory(item)} // Pass selected category to handleCategory
           >
             {item}
@@ -74,3 +74,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

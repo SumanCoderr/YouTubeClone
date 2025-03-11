@@ -49,19 +49,28 @@ export const getVideoById = async (req, res) => {
 
 export const updatelike = async (req, res) => {
   try {
-    if (!req.user || !req.user.id) {
-      return res.status(403).json({ message: "User not authenticated" });
+    // Assuming the video ID and the new like/dislike count are passed in the body
+    const { videoId, like, dislike } = req.body;
+
+    // Find the video by ID
+    const video = await Video.findById(videoId);
+
+    if (!video) {
+      return res.status(404).json({ error: "Video not found" });
     }
 
-    const { likes } = req.body;
-    const userId = req.user.id; // Assumes user info is set by authMiddleware
+    // Update like/dislike counts
+    if (like !== undefined) {
+      video.like = like;
+    }
+    if (dislike !== undefined) {
+      video.dislike = dislike;
+    }
 
-    // Add logic for updating the like in your database here
-    // For example: await SomeModel.updateLike(userId, likes);
-
-    res.status(200).json({ message: "Like updated successfully" });
-
+    await video.save();
+    res.status(200).json({ message: "Like/Dislike updated successfully", video });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 };

@@ -1,39 +1,50 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import NotFound from './Components/NotFound.jsx'
-import Home from './Pages/Home.jsx'
-import Login from './Components/Login.jsx'
-import SignIp from './Components/SignIn.jsx'
-import VideoPage from './Pages/VideoPage.jsx'
-import ChannelPage from './Pages/ChannelPage.jsx'
+// import  from 
+// import  from 
+// import  from 
+// import  from 
+// import  from 
+// import  from 
+
+
+// Lazy Loading
+
+const Home = lazy(() => import('./Pages/Home.jsx'))
+const Login = lazy(() => import('./Components/Login.jsx'))
+const SignIp = lazy(() => import('./Components/SignIn.jsx'))
+const VideoPage = lazy(() => import('./Pages/VideoPage.jsx'))
+const ChannelPage = lazy(() => import('./Pages/ChannelPage.jsx'))
+const NotFound = lazy(() => import('./Components/NotFound.jsx'))
+
 
 const appRouter = createBrowserRouter([
   {
     path:"/",
     element : <App/>,
-    errorElement: <NotFound/>,
+    errorElement: <Suspense fallback ={<div>Loading...</div>}><NotFound/></Suspense>,
     children: [
       {
         path : "/",
-        element:  <Home/>
+        element:  (<Suspense fallback ={<div>Loading...</div>}><Home/></Suspense>)
       },
       {
-        path:"/:id",
-        element: <VideoPage/>
+        path:"/watch/:id",
+        element: (<Suspense fallback ={<div>Loading...</div>}><VideoPage/></Suspense>)
       },
       {
         path:"/channel/:id",
-        element: <ChannelPage/>
+        element: (<Suspense fallback ={<div>Loading...</div>}><ChannelPage/></Suspense>)
       },
       {
         path: "/login",
-        element: <Login/>
+        element: (<Suspense fallback ={<div>Loading...</div>}><Login/></Suspense>)
       },
       {
         path: "/signin",
-        element:<SignIp/>
+        element: (<Suspense fallback ={<div>Loading...</div>}><SignIp/></Suspense>)
       }
     ]
   }

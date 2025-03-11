@@ -8,16 +8,6 @@ function SearchBar() {
 
   const[videos, setVideos] = useState([])
 
-  useEffect(() => {
-    if (!token) return;
-    axios
-      .get("http://localhost:3000/allvideos", {
-        headers: { Authorization: `JWT ${token}` },
-      })
-      .then((res) => setVideos(res.data.videos))
-      .catch((err) => console.log(err));
-  }, [query]);
-
   const handleSearch = () => {
     // console.log('Search for:', query);
     const searchedVideo = videos.filter((video) => video.title.toLowerCase().includes(query.toLowerCase()))
@@ -33,7 +23,7 @@ function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search"
-        className="pl-6 py-2 w-150 rounded-l-full focus:outline-none"
+        className="pl-6 py-2 lg:w-150 rounded-l-full focus:outline-none"
       />
 
       {/* Search Button */}
