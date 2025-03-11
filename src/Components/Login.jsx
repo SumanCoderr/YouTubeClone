@@ -19,6 +19,7 @@ const Login = () => {
       });
       localStorage.setItem('token', response.data.accessToken
       ); // Save token in localStorage
+      localStorage.setItem("name", email)
       navigate('/'); // Redirect to videos page
     } catch (err) {
       setError('Invalid credentials');

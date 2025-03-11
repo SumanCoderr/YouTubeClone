@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 function Videos({ videos }) { // Accept filtered videos as a prop
   if (!videos || videos.length === 0) {
     return <p className="text-2xl font-semibold text-center m-20">No videos found for this category.</p>;

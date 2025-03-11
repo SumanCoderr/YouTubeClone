@@ -46,3 +46,22 @@ export const getVideoById = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+export const updatelike = async (req, res) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(403).json({ message: "User not authenticated" });
+    }
+
+    const { likes } = req.body;
+    const userId = req.user.id; // Assumes user info is set by authMiddleware
+
+    // Add logic for updating the like in your database here
+    // For example: await SomeModel.updateLike(userId, likes);
+
+    res.status(200).json({ message: "Like updated successfully" });
+
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};

@@ -7,6 +7,7 @@ import Home from './Pages/Home.jsx'
 import Login from './Components/Login.jsx'
 import SignIp from './Components/SignIn.jsx'
 import VideoPage from './Pages/VideoPage.jsx'
+import ChannelPage from './Pages/ChannelPage.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -22,10 +23,10 @@ const appRouter = createBrowserRouter([
         path:"/:id",
         element: <VideoPage/>
       },
-      // {
-      //   path:"/user/:id",
-      //   element: <ChannelPage/>
-      // },
+      {
+        path:"/channel/:id",
+        element: <ChannelPage/>
+      },
       {
         path: "/login",
         element: <Login/>

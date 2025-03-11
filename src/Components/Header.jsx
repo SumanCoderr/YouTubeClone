@@ -5,14 +5,25 @@ import { FiPlus } from "react-icons/fi";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import { useSidebar } from "../utilis/useContext.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaRegUser } from "react-icons/fa";
 
 const Header = () => {
   const { sideBar, setSideBarFun } = useSidebar();
   const [userModal, setUserModal] = useState(false);
   const [user, setUser] = useState(
-    "https://t3.ftcdn.net/jpg/03/53/11/00/360_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
+    <FaRegUser />
+
   );
+
+  useEffect(() => {
+    const userName = localStorage.getItem("name");
+    if (userName) {
+      setUser(userName.split("")[0].toUpperCase()); // Assuming the name stored is the URL of the profile image
+    }
+  }, []);
+
+  // console.log(user.split('')[0])
 
   return (
     <div className="m-0 p-0 box-border">
@@ -25,10 +36,12 @@ const Header = () => {
             >
               <IoReorderThreeOutline className="text-4xl hover:bg-gray-100 p-1 rounded-2xl" />
             </div>
-            <Link to={"/"}><div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
-              <FaYoutube className="text-red-600 text-3xl" />
-              <h6>YouTube</h6>
-            </div></Link>
+            <Link to={"/"}>
+              <div className="cursor-pointer flex flex-row items-center text-xl font-semibold">
+                <FaYoutube className="text-red-600 text-3xl" />
+                <h6>YouTube</h6>
+              </div>
+            </Link>
           </div>
 
           <div>
@@ -43,22 +56,27 @@ const Header = () => {
               </span>
             </div>
             <FaRegBell className="text-4xl text-gray-700 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-all" />
-            {/* <Link to={"/login"}> */}
-              <img
-                onClick={() => setUserModal((prev) => !prev)}
-                src={user}
-                className="cursor-pointer h-10 w-10 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-all"
-                alt="user"
-              />
+
+            <div
+              onClick={() => setUserModal((prev) => !prev)}
+              className={`text-xl mr-5 border-2 ${
+                localStorage.getItem("name") ? "py-1 px-3" : "p-2"
+              } cursor-pointer rounded-3xl bg-gray-800 font-semibold text-white`}
+            >
+              {user}
+            </div>
+
             {/* </Link> */}
             {userModal && (
               <div className="absolute top-12 right-0 bg-white rounded-md shadow-lg w-40 border border-gray-300">
-                <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
-                  Profile
-                </div>
-                <Link to="/login"><div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
-                  Login
+                <Link to={"/channel/:id"}><div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                  Channel
                 </div></Link>
+                <Link to="/login">
+                  <div className="hover:bg-neutral-900 hover:text-white cursor-pointer px-4 py-2 transition-all">
+                    Login
+                  </div>
+                </Link>
               </div>
             )}
           </div>

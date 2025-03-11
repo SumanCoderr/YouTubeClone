@@ -25,6 +25,7 @@ const SignUp = () => {
         "http://localhost:3000/register",
         formData
       );
+      localStorage.setItem("name", formData.name)
       navigate('/login'); // Redirect to videos page
 
       console.log(response.data);

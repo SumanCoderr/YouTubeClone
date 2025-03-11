@@ -21,6 +21,11 @@ const HomePage = () => {
       .catch((err) => console.log(err));
   }, [token]);
 
+
+  if (!token) {
+        return <p className="text-2xl font-semibold text-center m-20">Please log in to access the videos.</p>;
+      }
+
   const options = [
     "All",
     "Programming",

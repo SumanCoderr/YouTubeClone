@@ -7,41 +7,51 @@ import { RiShareForwardLine } from "react-icons/ri";
 import { RiDownloadLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 function VideoPage() {
+  const token = localStorage.getItem("token");
   const [video, setVideo] = useState([]); // Store all videos
+  const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const { id } = useParams(); // Get the video id from the URL
 
   useEffect(() => {
+    if (!token) return;
     axios
-      .get("http://localhost:3000/allvideos")
+      .get("http://localhost:3000/allvideos", {
+        headers: { Authorization: `JWT ${token}` },
+      })
       .then((res) => {
-        setVideo(res.data.videos);
+        setVideos(res.data.videos);
         setLoading(false); // Set loading to false once the data is fetched
       })
       .catch((err) => {
         console.log(err);
         setLoading(false); // Ensure loading state is updated on error
       });
-  }, []); // Only fetch data once on component mount
 
-  // Filter video by id
-  const filteredVideo = video.filter((video) => video._id === id);
+    axios
+      .get(`http://localhost:3000/video/${id}`, {
+        headers: { Authorization: `JWT ${token}` },
+      })
+      .then((res) => {
+        setVideo(res.data.video);
+        setLoading(false);
+      })
+      .catch((err) => console.log("hello", err));
+  }, [token]);
 
-  console.log(video);
-  // Handle loading state and empty filtered result
   if (loading) {
     return (
       <p className="text-center m-30 font-semibold text-2xl">Loading...</p>
     );
   }
 
-  if (filteredVideo.length === 0) {
+  if (video.length === 0) {
     return <p>Video not found.</p>;
   }
 
   // Destructure the video data
   const { title, channelName, description, dislike, like, videoLink, views } =
-    filteredVideo[0];
+    video;
 
   return (
     <div className="flex flex-col md:flex-row mt-20 pt-2 p-10 gap-8">
@@ -143,29 +153,27 @@ function VideoPage() {
         </div>
       </div>
       <div className="w-full md:w-1/3">
-  <div className="space-y-4 flex flex-col gap-2">
-    {video.map((videoItem) => (
-      <Link key={videoItem._id} to={`/${videoItem._id}`}>
-        <div className="flex space-x-4">
-          <img
-            src={videoItem.thumbnail}
-            alt="thumbnail"
-            className="w-55 h-30 object-cover rounded"
-          />
-          <div className="flex flex-col justify-center">
-            <h4 className="text-base font-semibold">{videoItem.title}</h4>
-            <div>
-              <p>{videoItem.channelName}</p>
-            </div>
-            <p className="text-xs text-gray-500">3M views</p>
-          </div>
+        <div className="space-y-4 flex flex-col gap-1">
+          {videos.map((videoItem) => (
+            <Link key={videoItem._id} to={`/${videoItem._id}`}>
+              <div className="flex space-x-4">
+                <img
+                  src={videoItem.thumbnail}
+                  alt="thumbnail"
+                  className="w-55 h-30 object-cover rounded"
+                />
+                <div className="flex flex-col justify-center">
+                  <h4 className="text-base font-semibold">{videoItem.title}</h4>
+                  <div>
+                    <p>{videoItem.channelName}</p>
+                  </div>
+                  <p className="text-xs text-gray-500">3M views</p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </Link>
-    ))}
-  </div>
-</div>
-
-
+      </div>
     </div>
   );
 }
